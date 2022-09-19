@@ -1,0 +1,2 @@
+# django-harj
+Harjoituksia Djangolla
