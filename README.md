@@ -30,10 +30,5 @@ https://docs.djangoproject.com/en/4.1/intro/tutorial01/
 
 Kun on tehty uusia modeleita tai muutoksia olemassa oleviin modeleihin (`models.py`-tiedostossa), niin pitää ajaa: `python manage.py makemigrations APPLIKAATION_NIMI` esim. `python manage.py makemigrations varauskalenteri`
 
-
-
 # Admin-käyttäjän luominen
-```
-python manage.py runserver
-```
-
+`python manage.py createsuperuser`

@@ -1,0 +1,20 @@
+<html>
+    <h1>Varaa tapahtuma</h1>
+    <h2>Tapahtuma: {{tapahtuma.otsikko}} </h2>
+    <p>
+        Aloitus {{tapahtuma.alku.date}} 
+        klo {{tapahtuma.alku.time}}
+        kesto {{tapahtuma.kesto_tuntia|floatformat}} h
+    </p>
+    <p>
+        {{tapahtuma.kuvaus}}
+    </p>
+    {% if varattu %}
+    Olet varannut paikkasi
+    {%else%}
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" value="Osallistun!">
+        </form>
+    {% endif %}
+</html>
