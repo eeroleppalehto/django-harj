@@ -10,7 +10,7 @@ class Tapahtuma(models.Model):
     kuvaus = models.TextField()
     alku = models.DateTimeField()
     loppu = models.DateTimeField()
-    osallistujat = models.ManyToManyField(settings.AUTH_USER_MODEL, required=False)
+    osallistujat = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
     paikkoja = models.IntegerField()
 
 
@@ -29,10 +29,10 @@ class Tapahtuma(models.Model):
         if user in self.osallistujat.all():
             return True
         osallistujia = self.osallistujat.all().count()
-        if osallistujia +1 > self.paikkoja:
+        if osallistujia + 1 > self.paikkoja:
             return False
         self.osallistujat.add(user)
         return True
     
     def onko_varattu(self, user):
-        pass
+        return (user in self.osallistujat.all())

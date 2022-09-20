@@ -1,4 +1,3 @@
-from http.client import HTTPResponse
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.conf import settings
@@ -14,18 +13,16 @@ def tapahtumalistaus(request):
     # return HttpResponse(vastaus)
 
 def varaa_tapahtuma(request, id):
-    
-
     tapahtuma = Tapahtuma.objects.get(id=id)
     context = {
         'tapahtuma': tapahtuma
     }
 
     if request.method == "POST":
-        tapahtuma.varaa(request.user)
+        varattu = tapahtuma.varaa(request.user)
         context["varattu"] = varattu
     else:
         varattu = tapahtuma.onko_varattu(request.user)
-        context["varattu"] = False
+        context["varattu"] = varattu
 
     return render(request, "varaa.html", context)
