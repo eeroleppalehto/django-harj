@@ -1,9 +1,9 @@
-Hei!
+Hei, {{user.username}}!
 
 Tervetuloa varaussovellukseen!
 
-Aktivoi käyttäjä tunnukset klikkaamalla alla olevaa linkkiä.
+Aktivoi käyttäjätunnuksesi klikkaamalla allaolevaa linkkiä.
 
-{scheme}://{{request.get_host}}{ % url 'django_registration_activate' activation_key % }
+{{scheme}}://{{request.get_host}}{% url 'django_registration_activate' activation_key %}
 
-Aktivointi täytyy tehdä {{expiration_days}} kuluessa.
+Aktivointi pitää tehdä {{expiration_days}} päivän kuluessa.
