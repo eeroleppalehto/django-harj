@@ -1,20 +1,45 @@
 <html>
+<style>
+    a:link {
+        color : black
+    }
+
+    a:visited {
+        color: grey
+    }
+</style>
     <h1>Varaa tapahtuma</h1>
     <h2>Tapahtuma: {{tapahtuma.otsikko}} </h2>
     <p>
-        Aloitus {{tapahtuma.alku.date}} 
-        klo {{tapahtuma.alku.time}}
-        kesto {{tapahtuma.kesto_tuntia|floatformat}} h
+        {% spaceless %}
+        <span>Aloitus {{tapahtuma.alku.date}}</span>
+        <span>klo</span>
+        <span>{{tapahtuma.alku.time}}</span>
+        {% if tapahtuma.kesto %}
+            <span>,</span>
+            <span>kesto</span>
+            <span>{{tapahtuma.kesto_tuntia|floatformat}} h</span>
+        {% endif %}
+        {% endspaceless %}
     </p>
     <p>
         {{tapahtuma.kuvaus}}
     </p>
     {% if varattu %}
-    Olet varannut paikkasi
-    {%else%}
+        Olet varannut paikkasi
         <form method="post">
             {% csrf_token %}
-            <input type="submit" value="Osallistun!">
+            <input type="hidden" name="toiminto" value="peru"/>
+            <input type="submit" value="Peru varaus"/>
         </form>
+    {% elif tapahtuma.onko_tilaa %}
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" value="Osallistun!"/>
+        </form>
+    {% else %}
+        Harmi, paikat on loppu
     {% endif %}
+
+    <a href="{% url 'tapahtumalistaus' %}">Tapahtumat</a>
 </html>

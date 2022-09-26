@@ -1,9 +1,18 @@
 <html>
+<style>
+    a:link {
+        color : black
+    }
+
+    a:visited {
+        color: grey
+    }
+</style>
     Valitse tapahtuma johon haluat osallistua:
     <ul>
         {% for tapahtuma in tapahtumat %}
         <li>
-            <a href="{{tapahtuma.id}}">{{tapahtuma}}</a>
+            <a href="{% url 'varaus' tapahtuma.id %}">{{tapahtuma}}</a>
         </li>
         {% endfor %}
     </ul>
